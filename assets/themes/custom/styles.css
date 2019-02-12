@@ -1,4 +1,4 @@
-
+@import url('https://fonts.googleapis.com/css?family=ZCOOL+KuaiLe');
 .bd-placeholder-img {
     font-size: 1.125rem;
     text-anchor: middle;
@@ -12,6 +12,17 @@
   body {
     font-size: .875rem;
   }
+  .buddies_tag{
+    font-family: 'ZCOOL KuaiLe', cursive;
+    color:#2196f3;
+  }
+  .addfriend_tag{
+    color: yellowgreen;
+    margin-left: 80%;
+    margin-bottom: 10px;
+    padding-bottom:30px;
+  }
+  
   
   .feather {
     width: 16px;
