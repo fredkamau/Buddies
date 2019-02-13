@@ -1,15 +1,32 @@
 <?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+
 class Friends extends MX_Controller{
     function __construct()
     {
         parent:: __construct();
         $this->load->model("site/site_model");
         $this->load->model("friends_model");
+        $this->load->helper('url');
+        $this->load->library("pagination");
     }
     public function index()
     {
-        $v_data["all_friends"] = $this->friends_model->get_friend();
+        $config = array();
+        $config["base_url"] = base_url() . "friends";
+        $config["total_rows"] = $this->friends_model->get_count();
+        $config["per_page"] = 5;
+        $config["uri_segment"] = 2;
 
+        $this->pagination->initialize($config);
+
+        $page = ($this->uri->segment(2)) ? $this->uri->segment(2) : 0;
+
+        //$data["links"] = $this->pagination->create_links();
+        //$data['friends'] = $this->friends_model->get_friends($config["per_page"], $page);
+        //$this->load->view('all_friends', $data);
+
+        $v_data["all_friends"] = $this->friends_model->get_friend($config["per_page"], $page);
         $data = array("title" =>$this->site_model->display_page_title(),
             "content" =>$this->load->view("friends/all_friends", $v_data, TRUE));
         $this->load->view("site/layouts/layout", $data);
@@ -64,5 +81,14 @@ class Friends extends MX_Controller{
         $data["form_error"] = validation_errors();
         $this->load->view("add_friend", $data);
     }
+
+      public function delete_friend($id)
+        {
+            //Returns to the same page if succeeds
+            if($this->friends_model->delete($id))
+        {
+            redirect("friends/friends/index/".$id);
+        }
+        }
 }
 ?>

@@ -7,32 +7,13 @@
 	<title>Friends</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" type="text/css" media="screen" href="<?php echo base_url() ?>assets/themes/custom/styles.css">
-	<link href="<?php base_url();?>assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link href="<?php base_url();?>../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 	<link href="<?php base_url();?>assets/vendor/jquery/jquery-3.3.1.slim.min.js" rel="stylesheet">
-	<script>
-$(document).ready(function(){
-  $("#myInput").on("keyup", function() {
-    var value = $(this).val().toLowerCase();
-    $("#myTable tr").filter(function() {
-      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-    });
-  });
-});
-	
-	</script>
 
 </head>
 
 <body>
-<nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-		<a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Dashboard</a>
-		<input id="myInput" class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
-		<ul class="navbar-nav px-3">
-			<li class="nav-item text-nowrap">
-				<a class="nav-link" href="#">Sign out</a>
-			</li>
-		</ul>
-	</nav>
+
 	
 <script>
 
@@ -62,14 +43,16 @@ $(document).ready(function(){
         if(!empty($error)){
             echo $error;
         }
-        ?>
+		?>
+		
        <div class="buddies_tag">
-           <h2>Buddies.Com</h2>
+		   <h2>My Buddies</h2>   
        </div>
        <div>
-       <?php echo anchor("friends/new_friend", "Add Friend", "class='addfriend_tag btn btn-primary'");?>
-		<table class="table table-hover">
-            
+	   <?php //echo anchor("friends/new_friend", "Add Friend", "class='addfriend_tag btn btn-info btn-md'");?>  
+
+	   
+		<table class="table table-hover">      
        </div>
              <thead>  
 			<tr>
@@ -116,26 +99,27 @@ $(document).ready(function(){
 					<?php echo anchor("friends/edit/".$id,"Edit", "class='btn btn-warning'");?>
 					<a href="<?php echo site_url()?>friends/welcome/">
 				</td>
+				<!-- <td>
+					<?php //echo anchor("friends/delete/".$id,"Delete", "class='btn btn-danger'");?>
+					<a href="<?php //echo site_url()?>friends/welcome/">
+				</td> -->
 				<td>
-					<?php echo anchor("friends/delete/".$id,"Delete", "class='btn btn-danger'");?>
-					<a href="<?php echo site_url()?>friends/welcome/">
-				</td>
+                   <?php echo anchor("friends/delete_friend/".$id, "Delete", "class='btn btn-danger'");?>
+               </td>
 
 			</tr>
 			<?php 
                 }
             }
-
 ?>
-
-
 			</tbody>
-	
 		</table>
-        </div>
-		
-		
+		<p><?php echo $this->pagination->create_links(); ?></p>
+
+        </div>	
 	</div>
+
+	<?php $this->load->view("site/layouts/includes/footer.php"); ?>
 </body>
 
 </html>
